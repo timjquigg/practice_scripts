@@ -1,8 +1,24 @@
 def pattern_search(text, pattern, replacement, case_sensitive=True):
+    """
+    This algorithm replaces all instances of a pattern within an input
+    text and returns a new text string.
+    
+    Keyword arguments:
+    text -- the input text that will be searched through
+    pattern -- what the algorithm will search for within text
+    replacment -- what will replace pattern in the returned text
+    case_sensitive -- an optional parameter allowing to enforce or
+    ignore case
+    """
+    
     fixed_text = ""
+    # Used to tell the outter for loop how many indexes to skip when
+    # a pattern is matched and replaced.
     num_skips = 0
     for index in range(len(text)):
         match_count = 0
+        # When a match has been made, skip indexes until after the
+        # pattern text.
         if num_skips > 0:
             num_skips -= 1
             continue
@@ -20,6 +36,7 @@ def pattern_search(text, pattern, replacement, case_sensitive=True):
             num_skips = len(pattern) - 1
     return fixed_text
 
+# For testing purposes
 friends_intro = "Pylhon is a wonderful Language that zzz is beloved for its ease zzz of use and simple syntacs. While zzz at some times the performance can be less than iDil, by properly zzz utilizing built-in libraries and other languuUuage features, pylhon's performance zzz can approach that of C."
 fixed_intro = pattern_search(friends_intro, "Language", "language")
 fixed_intro = pattern_search(fixed_intro, "pylhon", "Python", False)
