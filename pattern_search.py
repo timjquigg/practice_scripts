@@ -1,16 +1,17 @@
 def pattern_search(text, pattern, replacement, case_sensitive=True):
-    """
-    This algorithm replaces all instances of a pattern within an input
+    """This algorithm replaces all instances of a pattern within an input
     text and returns a new text string.
     
-    Keyword arguments:
-    text -- the input text that will be searched through
-    pattern -- what the algorithm will search for within text
-    replacment -- what will replace pattern in the returned text
-    case_sensitive -- an optional parameter allowing to enforce or
-    ignore case
+    Args:
+        text (str): the input text that will be searched through
+        pattern (str): what the algorithm will search for within text
+        replacement (str): what will replace pattern in the returned text
+        case_sensitive (bool, optional): an optional parameter allowing to enforce or
+    ignore case. Defaults to True.
+
+    Returns:
+        str: The revised text input with changes made
     """
-    
     fixed_text = ""
     # Used to tell the outter for loop how many indexes to skip when
     # a pattern is matched and replaced.
