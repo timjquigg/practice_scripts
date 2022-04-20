@@ -13,10 +13,16 @@ def bubblesort(lst):
     Returns:
         lst: The original list, now sorted.
     """
-    for item in lst:
+    # This will loop over each item until it goes through a full loop
+    # without having to change anything, at which point the list is
+    # sorted. 
+    sorted = False
+    while not sorted:
+        sorted = True
         for i in range(len(lst) - 1):
             if lst[i] > lst[i+1]:
                 lst[i], lst[i+1] = lst[i+1], lst[i]
+                sorted = False
     return lst
 
 def merge_sort(lst):
@@ -66,13 +72,49 @@ def merge(left, right):
         result += right
     return result
 
-#For testing
-test_list = []
-for i in range(10):
-    test_list.append(random.randint(0,100))
+def quick_sort(lst, start, end):
+    """This is an implimentation of the quick sort algorithm. It picks
+    a middle point of the list at random to act as a pivot. It then
+    divides the list into those items that are less than the value of
+    the pivot and those items that are greater than the value of the
+    pivot. It then recursively runs the same check on each half. This
+    function alters the input list. 
 
-print(test_list)
-print(merge_sort(test_list))
-print(test_list)
-print(bubblesort(test_list))
-print(test_list)
+    Args:
+        lst (list): The input list to be sorted.
+        start (int): Where in the list to start.
+        end (end): Where in the list to end.
+    """
+    if start >= end:
+        return
+    pivot_index = random.randrange(start, end + 1)
+    pivot_value = lst[pivot_index]
+    less_than_pointer = start
+    lst[end], lst[pivot_index] = lst[pivot_index], lst[end]
+    for i in range(start, end):
+        if lst[i] < pivot_value:
+            lst[i], lst[less_than_pointer] = lst[less_than_pointer], lst[i]
+            less_than_pointer += 1
+    lst[end], lst[less_than_pointer] = lst[less_than_pointer], lst[end]
+    quick_sort(lst, start, less_than_pointer - 1)
+    quick_sort(lst, less_than_pointer + 1, end)
+            
+    
+
+#For testing
+merge_test_list = []
+bubble_test_list = []
+quick_test_list = []
+for i in range(10):
+    merge_test_list.append(random.randint(0,100))
+    bubble_test_list.append(random.randint(0,100))
+    quick_test_list.append(random.randint(0,100))
+
+
+print("Original list for merge sort:\n", merge_test_list)
+print("Sorted list from merge sort:\n", merge_sort(merge_test_list))
+print("Original list for bubble sort:\n", bubble_test_list)
+print("Sorted list from bubble sort:\n", bubblesort(bubble_test_list))
+print("Original list for quick sort:\n", quick_test_list)
+quick_sort(quick_test_list, 0, len(quick_test_list) -1)
+print("Sorted list from quick sort:\n", quick_test_list)
